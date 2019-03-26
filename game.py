@@ -11,8 +11,12 @@ import pygame
 from pygame.locals import *
 
 from class import *
+from constant import*
 
 # Start pygame
 pygame.init()
 
-windows = pigame.display.set_mode((side_windows, side_windows))
+#start windows game
+windows = pygame.display.set_mode((side_windows, side_windows))
+icon = pygame.image.load(picture_icon)
+pygame.display.set_caption(title_windows)
