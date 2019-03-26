@@ -11,7 +11,7 @@ title_windows = "MAC GIVER LABYRINTH"
 picture_icon = "pictures/MacGiver.png"
 
 #Picture of the games
-base_picture =
+background_picture ="pictures/background.jpg"
 wall_picture =
 depart_picture = "pictures/depart.png"
 finish_picture = "pictures/depart.png"
