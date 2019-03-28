@@ -16,6 +16,11 @@ from constant import*
 # Start pygame
 pygame.init()
 
+#Music
+pygame.mixer.music.load("sound/mc.wav")
+son.play()
+pygame.mixer.music.get_volume(0.3)
+
 #start windows game
 windows = pygame.display.set_mode((side_windows, side_windows))
 icon = pygame.image.load(picture_icon)
