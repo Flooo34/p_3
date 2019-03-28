@@ -25,3 +25,16 @@ pygame.mixer.music.get_volume(0.3)
 windows = pygame.display.set_mode((side_windows, side_windows))
 icon = pygame.image.load(picture_icon)
 pygame.display.set_caption(title_windows)
+
+continue_game = 1
+
+while continue_game:
+    #reduct speed loop
+    pygame.time.Clock().tick(30)
+    for event in pygame.event.get():
+        #if quit the game
+        if event.type == QUIT or event.type == KEYDOWN and event.key == K_ESCAPE:
+            continue_game = 0
+
+    pygame.key.set_repeat(400, 30)
+    
