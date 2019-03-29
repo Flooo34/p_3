@@ -37,8 +37,8 @@ class Game:
         start = pygame.image.load(start_picture).convert()
         finish = pygame.image.load(start_picture).convert()
         rip = pygame.image.load(rip_picture).convert_alpha()
-        staircase_up = pygame.image.load(staircase_up_picture).convert()
-        staircase_down = pygame.image.load(staircase_down_picture).convert()
+        #staircase_up = pygame.image.load(staircase_up_picture).convert()
+        #staircase_down = pygame.image.load(staircase_down_picture).convert()
         test = pygame.image.load(groundtest_picture).convert()
         guardian = pygame.image.load(guardian_picture).convert()
 
@@ -52,10 +52,10 @@ class Game:
                     windows.blit(wall, (x,y))   #wall
                 elif sprite == "s":
                     windows.blit(start, (x,y))  #Start
-                elif sprite == "u":
-                    windows.blit(staircase_up, (x,y))   #staircase up
-                elif sprite == "d":
-                    windows.blit(staircase_down, (x,y)) #staircase down
+                #elif sprite == "u":
+                    #windows.blit(staircase_up, (x,y))   #staircase up
+                #elif sprite == "d":
+                    #windows.blit(staircase_down, (x,y)) #staircase down
                 elif sprite == "r":
                     windows.blit(rip, (x,y))    #rip case
                 elif sprite == "g":
