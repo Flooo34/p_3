@@ -26,52 +26,47 @@ pygame.mixer.music.set_volume(0.05)
 #start windows game
 windows = pygame.display.set_mode((side_windows, side_windows))
 icon = pygame.image.load(picture_icon)
-pygame.display.set_caption(title_windows)
+pygame.display.set_icon(icon)
 
-Mac = Character('pictures/MacGyver.png', 'pictures/MacGyver.png', 'pictures/MacGyver.png', 'pictures/MacGyver.png')# !!!!!!!!!!!!!!!!
-windows.blit(Mac, (0,0))
-pygame.display.flip()
+pygame.display.set_caption(title_windows)
+nivel = Game('map.txt')
+nivel.generate()
+nivel.show(windows)
+
+
+mac = Player('pictures/MacGyver.png', 'pictures/MacGyver.png', 'pictures/MacGyver.png', 'pictures/MacGyver.png', nivel)# !!!!!!!!!!!!!!!!
+#pygame.display.flip()
 continue_game = 1
 
 while continue_game:
     #reduct speed loop
     pygame.time.Clock().tick(30)
 
-    for event in pygame.event.get():
-        #if quit the game
-        if event.type == QUIT or event.type == KEYDOWN and event.key == K_ESCAPE:
-            continue_game = 0
-
-    pygame.key.set_repeat(400, 30)
-
     background = pygame.image.load(background_picture).convert()
     windows.blit(background, (0,0))
-    windows.blit(Mac, (0,0))
 
-
-    nivel = Game('map.txt')
-    nivel.generate()
-    nivel.show(windows)
-    icon = pygame.image.load(picture_icon)
     pygame.display.flip()
+    #pygame.key.set_repeat(400, 30)
 
     for event in pygame.event.get():
-        if event.type == KEYDOWN:
+        #if quit the game
+        if event.type == QUIT:
+            continue_game = 0
+        elif event.type == KEYDOWN:
             if event.key == K_ESCAPE:
                 continue_game = 0
+            elif event.key == K_RIGHT:
+                mac.move("right")
+            elif event.key == K_LEFT:
+                mac.move("left")
+            elif event.key == K_UP:
+                mac.move("top")
+            elif event.key == K_DOWN:
+                mac.move("bot")
 
-            if event.key == K_RIGHT:
-                Mac.moove("right")
-            if event.key == K_LEFT:
-                Mac.moove("left")
-            if event.key == K_UP:
-                Mac.moove("top")
-            if event.key == K_DOWN:
-                Mac.moove("bot")
-
-    windows.blit(background, (0,0))
+    windows.blit(background, (0, 0))
     nivel.show(windows)
-    windows.blit(Mac, (0,0))
+    windows.blit(mac.direction, (mac.x, mac.y))
     pygame.display.flip()
 
     # Test de si il a les 3 objets pour win
