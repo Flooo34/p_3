@@ -18,10 +18,10 @@ from constant import*
 pygame.init()
 
 #Music
-sound = pygame.mixer.music.load("sound/mc.wav")
+'''sound = pygame.mixer.music.load("sound/mc.wav")
 pygame.mixer.music.play()
 volume = pygame.mixer.music.get_volume()
-pygame.mixer.music.set_volume(0.05)
+pygame.mixer.music.set_volume(0.05)'''
 
 #start windows game
 windows = pygame.display.set_mode((side_windows, side_windows))
@@ -29,7 +29,9 @@ icon = pygame.image.load(picture_icon)
 pygame.display.set_icon(icon)
 
 pygame.display.set_caption(title_windows)
+
 nivel = Game('map.txt')
+nivel.element()
 nivel.generate()
 nivel.show(windows)
 
