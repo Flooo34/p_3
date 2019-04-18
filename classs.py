@@ -31,6 +31,20 @@ class Game:
                 structure_g.append(line_g)
             self.structure = structure_g
 
+    def element(self):
+        for element in self.structure:
+            for sprites in element:
+                '''x = num_case * size_sprite
+                y = num_line * size_sprite'''
+                if element == "o":
+                    alea = randit(0,8)
+                    if alea == 1:
+                        structure_g[x][y] = "e"
+                    elif alea == 3:
+                        structure_g[x][y] = "p"
+                    elif alea == 7:
+                        structure_g[x][y] = "n"
+
 
     def show(self, windows):
         '''
@@ -50,7 +64,7 @@ class Game:
 
 
         num_line = 0
-        counter = 0
+        #counter = 0
 
         for line in self.structure:
             num_case = 0
@@ -71,22 +85,34 @@ class Game:
                     #windows.blit(test, (x,y))   #test case
                 elif sprite == "f":
                     windows.blit(finish, (x,y)) # finish case
+                elif sprite == "e":
+                    windows.blit(ether, (x,y))  #ether
+                elif sprite == "p":
+                    windows.blit(plastic, (x,y))    # plastic
+                elif sprite == "n":
+                    windows.blit(needle, (x,y))     #needle
 
                 '''elif sprite == "o":
-
                     #booléène
-                    if counter == q:
-                        windows.blit(ether, (x,y))
-                        counter += r
-                    elif counter == r:
-                        windows.blit(plastic, (x,y))
-                        counter += s
-                    elif counter == s:
-                        windows.blit(needle, (x,y))
-                        counter += z
+                    if counter == 0:
+                        alea = randint(0,5)
+                        if alea:
+                            windows.blit(ether, (x,y))
+                            counter += 1
+                    elif counter == 1:
+                        alea = randint(0,1)
+                        if alea:
+                            windows.blit(plastic, (x,y))
+                            counter += 1
+                    elif counter == 2:
+                        alea = randint(0,1)
+                        if alea:
+                            windows.blit(needle, (x,y))
+                            counter += 1
 
                     else:
                         pass'''
+
 
 
                 num_case += 1
@@ -137,5 +163,5 @@ class Player:
             if self.case_y < (number_sprite_side -1):
                 if self.game.structure[self.case_y+1][self.case_x] != "w":
                     self.case_y += 1
-                    self.x = self.case_y * size_sprite
+                    self.y = self.case_y * size_sprite
             self.direction = self.bot
