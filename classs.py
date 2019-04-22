@@ -14,7 +14,8 @@ from random import randint
 class Game:
     def __init__(self, folder):
         self.folder = folder
-        self.structure = 0
+        self.structure = self.generate()
+        self.objects = ["e", "p", "n"]
 
     def generate(self):
         '''
@@ -25,25 +26,22 @@ class Game:
             for line in folder:
                 line_g = []
                 #structure sprite
-                for sprite in line:
-                    if sprite != '\n':
-                        line_g.append(sprite)
+                for sprite in line.strip():
+                    line_g.append(sprite)
                 structure_g.append(line_g)
-            self.structure = structure_g
+            return structure_g
 
     def element(self):
-        for element in self.structure:
-            for sprites in element:
-                '''x = num_case * size_sprite
-                y = num_line * size_sprite'''
-                if element == "o":
-                    alea = randit(0,8)
-                    if alea == 1:
-                        structure_g[x][y] = "e"
-                    elif alea == 3:
-                        structure_g[x][y] = "p"
-                    elif alea == 7:
-                        structure_g[x][y] = "n"
+        '''
+        Method to positionate objects necesart to win in the map
+        '''
+        from math import floor
+        while self.objects:
+            alea = randint(0, 224)
+            x = floor(alea/15)
+            y = alea - (x*15)
+            if self.structure[x][y] == "o":
+                self.structure[x][y] = self.objects.pop()
 
 
     def show(self, windows):
@@ -62,10 +60,7 @@ class Game:
         plastic = pygame.image.load(plastic_picture).convert_alpha()
         needle = pygame.image.load(needle_picture).convert_alpha()
 
-
         num_line = 0
-        #counter = 0
-
         for line in self.structure:
             num_case = 0
             for sprite in line:
@@ -79,10 +74,12 @@ class Game:
 
                 elif sprite == "r":
                     windows.blit(rip, (x,y))    #rip case
+                elif sprite == "i":
+                    windows.blit(rip, (x,y))    #rip case
+                elif sprite == "z":
+                    windows.blit(rip, (x,y))    #rip case
                 elif sprite == "g":
                     windows.blit(guardian, (x,y))   #Guardian
-                #elif sprite == "t":
-                    #windows.blit(test, (x,y))   #test case
                 elif sprite == "f":
                     windows.blit(finish, (x,y)) # finish case
                 elif sprite == "e":
@@ -91,30 +88,6 @@ class Game:
                     windows.blit(plastic, (x,y))    # plastic
                 elif sprite == "n":
                     windows.blit(needle, (x,y))     #needle
-
-                '''elif sprite == "o":
-                    #booléène
-                    if counter == 0:
-                        alea = randint(0,5)
-                        if alea:
-                            windows.blit(ether, (x,y))
-                            counter += 1
-                    elif counter == 1:
-                        alea = randint(0,1)
-                        if alea:
-                            windows.blit(plastic, (x,y))
-                            counter += 1
-                    elif counter == 2:
-                        alea = randint(0,1)
-                        if alea:
-                            windows.blit(needle, (x,y))
-                            counter += 1
-
-                    else:
-                        pass'''
-
-
-
                 num_case += 1
             num_line += 1
 
@@ -138,6 +111,11 @@ class Player:
 
 
     def move(self, direction):
+        '''
+        Method to verificate if Mac can walk,
+        to calculate postion of Mac,
+        and to move Mac
+        '''
         if direction == "right":
             if self.case_x < (number_sprite_side -1):
                 if self.game.structure[self.case_y][self.case_x+1] != "w":
@@ -165,3 +143,24 @@ class Player:
                     self.case_y += 1
                     self.y = self.case_y * size_sprite
             self.direction = self.bot
+
+class Item:
+    '''
+    gestion des objets
+
+    '''
+    def __init__(self, game, player):
+        self.game = game
+        self.player = player
+
+    def object_win(self):
+        count = 0
+        #if mac position == "e":
+            #self.strucure[x][y] = "o"
+            #count =+ 1
+        #elif mac position == "p":
+            #self.strucure[x][y] = "o"
+            #count =+ 1
+        #elif mac position == "n":
+            #self.strucure[x][y] = "o"
+            #count =+ 1
